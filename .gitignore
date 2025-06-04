@@ -1,0 +1,33 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+.venv/
+.env
+.env.*
+
+# IDE
+.idea/
+.vscode/
+
+# PyCharm
+*.iml
+
+# macOS / Windows
+.DS_Store
+Thumbs.db
+
+# Test output
+htmlcov/
+.coverage
+.tox/
+.pytest_cache/
+
+# Poetry
+poetry.lock
+
+# Database / alembic
+*.sqlite3
+alembic/versions/*.pyc
