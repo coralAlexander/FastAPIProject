@@ -11,6 +11,10 @@ class Settings(BaseSettings):
     db_host: str
     db_name: str
 
+    log_level: str = "INFO"
+    log_file: str = "logs/app.log"
+    log_json: bool = True
+
     jwt_secret: str
     jwt_algorithm: str = "HS256"
 

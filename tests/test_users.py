@@ -15,3 +15,5 @@ def test_create_user(auth_token):
         }
     )
     assert response.status_code == 200 or response.status_code == 201
+    assert response.json() == {"id":2,"username":"newuser","email":"new@example.com"}
+
