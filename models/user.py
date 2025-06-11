@@ -9,4 +9,4 @@ class User(Base):
     username = Column(String(255))  # ✅ правильно
     email = Column(String(255), unique=True)
     hashed_password = Column(String(255))
-    is_admin = Column(Boolean, default=False)  # ✅ новое поле
+    role = Column(String(255))  # ✅ новое поле

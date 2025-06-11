@@ -8,11 +8,10 @@ from utils.security import hash_password, verify_password
 from utils.jwt import create_access_token
 from models.user import User as DBUser
 from dependencies.auth import get_current_user
-router = APIRouter(  # ✅ добавлено
-    prefix="/auth",  # ❗ если не хочешь /auth/login, убери эту строку
-    tags=["auth"]
-)
 
+
+
+router = APIRouter(prefix="/auth", tags=["auth"])
 
 @router.get("/protected")
 def protected_route(current_user: User = Depends(get_current_user)):
@@ -20,7 +19,10 @@ def protected_route(current_user: User = Depends(get_current_user)):
 
 
 @router.post("/users/", response_model=UserRead)
-def create_user(user: UserCreate, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+def create_user(
+    user: UserCreate,
+    db: Session = Depends(get_db)
+):
     db_user = db.query(User).filter(User.email == user.email).first()
     if db_user:
         raise HTTPException(status_code=400, detail="Email already registered")
