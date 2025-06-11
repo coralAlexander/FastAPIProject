@@ -1,5 +1,23 @@
 {
-  "dependencies": {
-    "react-router-dom": "^7.6.2"
+  "name": "fastapiproject",
+  "version": "1.0.0",
+  "description": "FastAPI Project",
+  "main": "index.js",
+  "scripts": {
+    "test:e2e": "npx playwright test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coralAlexander/FastAPIProject.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/coralAlexander/FastAPIProject/issues"
+  },
+  "homepage": "https://github.com/coralAlexander/FastAPIProject#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.53.0"
   }
 }
