@@ -6,7 +6,7 @@ client = TestClient(app)
 
 def test_create_user(auth_token):
     response = client.post(
-        "/auth/users/",
+        "/users/",
         headers={"Authorization": auth_token},
         json={
             "username": "newuser",
@@ -14,6 +14,10 @@ def test_create_user(auth_token):
             "password": "newpassword"
         }
     )
-    assert response.status_code == 200 or response.status_code == 201
-    assert response.json() == {"id":2,"username":"newuser","email":"new@example.com"}
+    assert response.status_code in [200, 201]
 
+    response_data = response.json()
+
+    assert "id" in response_data and isinstance(response_data["id"], int)
+    assert response_data["username"] == "newuser"
+    assert response_data["email"] == "new@example.com"

@@ -2,17 +2,16 @@ import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+
+from config import settings
 from main import app
-from database.session  import Base, get_db
+from database.session import Base, get_db, DATABASE_URL
 from models.user import User
 from utils.security import hash_password
 from utils.jwt import create_access_token
 
-# Тестовая БД SQLite (можно заменить на тестовый MySQL/Postgres URL)
-TEST_DB_URL = "sqlite:///./test.db"
-
 # Создание движка и сессии
-engine = create_engine(TEST_DB_URL, connect_args={"check_same_thread": False})
+engine = create_engine(DATABASE_URL)
 TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 # Создание всех таблиц
@@ -48,7 +47,7 @@ def auth_token():
             username="user1",
             email=test_email,
             hashed_password=hash_password("123456"),
-            is_admin=True
+            role="admin"
         )
         db.add(user)
         db.commit()
