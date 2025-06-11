@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import './AddUserForm.css';  // Подключаем стили
+import './AddUserForm.css';
 
 const AddUserForm = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('user');
+  const [message, setMessage] = useState('');  // сообщение для пользователя
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,19 +29,28 @@ const AddUserForm = () => {
 
       if (response.ok) {
         const data = await response.json();
-        alert(`✅ User created! ID: ${data.id}`);
+        showMessage(`✅ User created! ID: ${data.id}`);
       } else {
         const errorData = await response.json();
-        alert(`❌ Error: ${errorData.detail}`);
+        showMessage(`❌ Error: ${errorData.detail}`);
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('❌ Error sending request');
+      showMessage('❌ Error sending request');
     }
+  };
+
+  // Функция для показа сообщения на 3 секунды
+  const showMessage = (text) => {
+    setMessage(text);
+    setTimeout(() => {
+      setMessage('');
+    }, 3000);  // 3 секунды
   };
 
   return (
     <div className="form-container">
+      {message && <div className="notification">{message}</div>}
       <form onSubmit={handleSubmit} className="user-form">
         <h2>Add User</h2>
         <div className="form-group">

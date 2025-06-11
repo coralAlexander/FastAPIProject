@@ -5,6 +5,7 @@ import './LoginForm.css';
 const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -25,21 +26,33 @@ const LoginForm = () => {
 
       if (response.ok) {
         const data = await response.json();
-        localStorage.setItem('token', data.access_token);  // сохраним токен
-        alert('✅ Login successful!');
-        navigate('/adduser');  // редирект
+        localStorage.setItem('token', data.access_token);
+        showMessage('✅ Login successful! Redirecting...');
+        setTimeout(() => {
+          navigate('/adduser');  // редирект через 1.5 сек
+        }, 1500);
       } else {
         const errorData = await response.json();
-        alert(`❌ Login failed: ${errorData.detail}`);
+        showMessage(`❌ Login failed: ${errorData.detail}`);
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('❌ Error sending request');
+      showMessage('❌ Error sending request');
     }
+  };
+
+  // Показ сообщения + auto hide через 3 сек
+  const showMessage = (text) => {
+    setMessage(text);
+    setTimeout(() => {
+      setMessage('');
+    }, 3000);
   };
 
   return (
     <div className="login-container">
+      <div className="page-header">Fast API Project</div>  {/* Заголовок */}
+      {message && <div className="notification">{message}</div>}
       <form onSubmit={handleLogin} className="login-form">
         <h2>Login</h2>
         <div className="form-group">

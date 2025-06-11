@@ -1,7 +1,9 @@
-/* LoginForm.css */
-
 body {
   font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #667eea, #764ba2); /* красивый градиент */
 }
 
 .login-container {
@@ -9,14 +11,23 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #f4f6f8;
+  flex-direction: column;
+}
+
+.page-header {
+  font-size: 40px;
+  font-weight: bold;
+  color: #ffffff;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+  margin-bottom: 40px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .login-form {
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.9);
   padding: 30px 40px;
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   width: 400px;
 }
 
@@ -65,4 +76,23 @@ body {
 
 .submit-button:hover {
   background-color: #0056b3;
+}
+
+.notification {
+  background-color: #e0ffe0;
+  color: #2e7d32;
+  padding: 12px 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  animation: fadeInOut 3s forwards;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(-10px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-10px); }
 }
