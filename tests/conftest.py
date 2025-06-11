@@ -14,23 +14,6 @@ from utils.jwt import create_access_token
 engine = create_engine(DATABASE_URL)
 TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-# Создание всех таблиц
-Base.metadata.create_all(bind=engine)
-
-
-# Переопределение get_db для FastAPI
-def override_get_db():
-    db = TestingSessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-
-
-# Подмена зависимостей FastAPI
-app.dependency_overrides[get_db] = override_get_db
-
-
 @pytest.fixture(scope="module")
 def client():
     return TestClient(app)
@@ -38,13 +21,13 @@ def client():
 
 @pytest.fixture
 def auth_token():
-    db = next(override_get_db())
+    db = next(get_db())
     # Добавляем пользователя напрямую в базу
-    test_email = "user1@test.com"
+    test_email = "user2@test.com"
     user = db.query(User).filter(User.email == test_email).first()
     if not user:
         user = User(
-            username="user1",
+            username="user2",
             email=test_email,
             hashed_password=hash_password("123456"),
             role="admin"
@@ -58,8 +41,12 @@ def auth_token():
 
 
 # Очистка пользователей перед каждым тестом
-@pytest.fixture(autouse=True)
-def clean_users():
-    db = next(override_get_db())
-    db.query(User).delete()
+@pytest.fixture
+def cleanup_users():
+    yield
+    db = next(get_db())
+    db.query(User).filter(User.email.in_([
+        "new@example.com",
+        "user2@test.com"
+    ])).delete(synchronize_session=False)
     db.commit()

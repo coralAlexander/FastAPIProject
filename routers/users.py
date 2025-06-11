@@ -14,7 +14,7 @@ router = APIRouter()
 def create_user(
     user: UserCreate,
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user),
+    #current_user: User = Depends(get_current_user),
 ):
     db_user = db.query(User).filter(User.email == user.email).first()
     if db_user:
@@ -23,7 +23,8 @@ def create_user(
     new_user = User(
         username=user.username,
         email=user.email,
-        hashed_password=hash_password(user.password)
+        hashed_password=hash_password(user.password),
+        role=user.role
     )
     db.add(new_user)
     db.commit()

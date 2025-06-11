@@ -1,0 +1,71 @@
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './LoginForm.css';
+
+const LoginForm = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    const formData = new URLSearchParams();
+    formData.append('username', username);
+    formData.append('password', password);
+
+    try {
+      const response = await fetch('http://localhost:8000/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: formData
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem('token', data.access_token);  // сохраним токен
+        alert('✅ Login successful!');
+        navigate('/adduser');  // редирект
+      } else {
+        const errorData = await response.json();
+        alert(`❌ Login failed: ${errorData.detail}`);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('❌ Error sending request');
+    }
+  };
+
+  return (
+    <div className="login-container">
+      <form onSubmit={handleLogin} className="login-form">
+        <h2>Login</h2>
+        <div className="form-group">
+          <label>Username</label>
+          <input
+            type="text"
+            value={username}
+            onChange={e => setUsername(e.target.value)}
+            required
+            placeholder="Enter username"
+          />
+        </div>
+        <div className="form-group">
+          <label>Password</label>
+          <input
+            type="password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            required
+            placeholder="Enter password"
+          />
+        </div>
+        <button type="submit" className="submit-button">Login</button>
+      </form>
+    </div>
+  );
+};
+
+export default LoginForm;
