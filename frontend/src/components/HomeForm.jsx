@@ -1,0 +1,25 @@
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import './HomeForm.css';
+
+const Home = () => {
+  const navigate = useNavigate();
+
+  const handleNavigate = (path) => {
+    navigate(path);
+  };
+
+  return (
+    <div className="home-container">
+      <h1>Fast API Project - Home</h1>
+      <div className="button-group">
+        <button onClick={() => handleNavigate('/adduser')}>Create User</button>
+        <button onClick={() => handleNavigate('/updateuser')}>Update User</button>
+        <button onClick={() => handleNavigate('/deleteuser')}>Delete User</button>
+        <button onClick={() => handleNavigate('/userinfo')}>Get User Info</button>
+      </div>
+    </div>
+  );
+};
+
+export default Home;

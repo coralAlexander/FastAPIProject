@@ -29,7 +29,7 @@ const LoginForm = () => {
         localStorage.setItem('token', data.access_token);
         showMessage('✅ Login successful! Redirecting...');
         setTimeout(() => {
-          navigate('/adduser');  // редирект через 1.5 сек
+          navigate('/home');  // редирект через 1.5 сек
         }, 1500);
       } else {
         const errorData = await response.json();
