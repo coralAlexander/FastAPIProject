@@ -49,7 +49,7 @@ def test_add_user():
         page.click('button[type="submit"]')
 
         # Ждем переход на /adduser
-        page.wait_for_url('**/adduser')
+        page.wait_for_url('**/home')
 
         # Проверяем что заголовок Add User есть
         page.wait_for_selector('h2', timeout=5000)

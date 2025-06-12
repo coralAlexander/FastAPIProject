@@ -10,6 +10,8 @@ from routers.auth_route import get_current_user
 
 router = APIRouter()
 
+
+# Create user
 @router.post("/users/", response_model=UserRead)
 def create_user(
     user: UserCreate,
@@ -32,6 +34,7 @@ def create_user(
     return new_user
 
 
+# Update user
 @router.put("/users/{user_id}", response_model=UserRead)
 def update_user(
     user_id: int,
@@ -58,8 +61,10 @@ def update_user(
 
     return db_user
 
+
+# Get user info
 @router.get("/users/username/{username}", response_model=UserRead)
-def get_user_by_username(username: str, db: Session = Depends(get_db)):
+def get_user_by_username(username: str, db: Session = Depends(get_db) , current_user: User = Depends(get_current_user)):
     user = db.query(User).filter(User.username == username).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
@@ -67,9 +72,9 @@ def get_user_by_username(username: str, db: Session = Depends(get_db)):
 
 
 
-
+# Delete user
 @router.delete("/users/remove/{username}")
-def delete_remove_username(username: str, db: Session = Depends(get_db)):
+def delete_remove_username(username: str, db: Session = Depends(get_db) ,current_user: User = Depends(get_current_user)):
     user = db.query(User).filter(User.username == username).first()
     if not user:
         return {"detail": "User not found"}

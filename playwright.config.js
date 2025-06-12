@@ -3,7 +3,7 @@
 import { defineConfig } from '@playwright/test';
 
 export default defineConfig({
-  testDir: './playtest',
+  testDir: './playwright_js',
   timeout: 30000,
   retries: 0,
   use: {

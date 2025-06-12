@@ -1,13 +1,24 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import FormLayout from './FormLayout';  // ✅ импортируем layout
-import './AddUserForm.css';  // можно оставить для своих form-group и т.п.
+import './AddUserForm.css';
+import {useNavigate} from "react-router-dom";
 
 const AddUserForm = () => {
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('user');
   const [message, setMessage] = useState('');
+
+  // ✅ проверка на token при загрузке страницы
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/login');
+    }
+  }, [navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
