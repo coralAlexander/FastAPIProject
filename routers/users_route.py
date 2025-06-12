@@ -4,7 +4,7 @@ from database.session import get_db
 from models.user import User
 from schemas.user import UserCreate, UserRead, UserUpdate
 from utils.security import hash_password
-from routers.auth import get_current_user
+from routers.auth_route import get_current_user
 
 
 
@@ -64,6 +64,8 @@ def get_user_by_username(username: str, db: Session = Depends(get_db)):
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     return user
+
+
 
 
 @router.delete("/users/remove/{username}")

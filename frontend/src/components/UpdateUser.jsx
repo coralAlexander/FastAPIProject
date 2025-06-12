@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import './UpdateUser.css';
+import FormLayout from './FormLayout';  // ✅ добавляем FormLayout
+import './UpdateUser.css';  // можешь оставить для своих form-group, если есть
 
 const UpdateUser = () => {
   const [userId, setUserId] = useState('');
@@ -20,13 +21,13 @@ const UpdateUser = () => {
     };
 
     try {
-      const token = localStorage.getItem('token');  // если нужен токен
+      const token = localStorage.getItem('token');
 
       const response = await fetch(`http://localhost:8000/users/${userId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`  // если ты используешь авторизацию
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(updateData)
       });
@@ -52,10 +53,9 @@ const UpdateUser = () => {
   };
 
   return (
-    <div className="update-container">
-      <h2>Update User</h2>
+    <FormLayout title="Update User">  {/* ✅ теперь общий красивый layout */}
       {message && <div className="notification">{message}</div>}
-      <form onSubmit={handleSubmit} className="update-form">
+      <form onSubmit={handleSubmit} className="user-form">  {/* user-form можно оставить вместо update-form */}
         <div className="form-group">
           <label>User ID:</label>
           <input
@@ -102,7 +102,7 @@ const UpdateUser = () => {
         </div>
         <button type="submit" className="submit-button">Update User</button>
       </form>
-    </div>
+    </FormLayout>
   );
 };
 

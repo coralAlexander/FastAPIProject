@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import './AddUserForm.css';
+import FormLayout from './FormLayout';  // ✅ импортируем layout
+import './AddUserForm.css';  // можно оставить для своих form-group и т.п.
 
 const AddUserForm = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('user');
-  const [message, setMessage] = useState('');  // сообщение для пользователя
+  const [message, setMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,6 +24,7 @@ const AddUserForm = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
         body: JSON.stringify(userData)
       });
@@ -40,19 +42,17 @@ const AddUserForm = () => {
     }
   };
 
-  // Функция для показа сообщения на 3 секунды
   const showMessage = (text) => {
     setMessage(text);
     setTimeout(() => {
       setMessage('');
-    }, 3000);  // 3 секунды
+    }, 3000);
   };
 
   return (
-    <div className="form-container">
+    <FormLayout title="Add User">  {/* ✅ используем общий layout */}
       {message && <div className="notification">{message}</div>}
       <form onSubmit={handleSubmit} className="user-form">
-        <h2>Add User</h2>
         <div className="form-group">
           <label>Username</label>
           <input
@@ -92,7 +92,7 @@ const AddUserForm = () => {
         </div>
         <button type="submit" className="submit-button">Add User</button>
       </form>
-    </div>
+    </FormLayout>
   );
 };
 

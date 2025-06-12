@@ -43,8 +43,8 @@ def test_add_user():
         page.goto("http://localhost:3000/login")
 
         # Логин
-        page.fill('input[placeholder="Enter username"]', 'admin')
-        page.fill('input[placeholder="Enter password"]', '123456')
+        page.fill('input[placeholder="Username"]', 'admin')
+        page.fill('input[placeholder="Password"]', '123456')
 
         page.click('button[type="submit"]')
 

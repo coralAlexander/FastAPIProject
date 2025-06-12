@@ -1,0 +1,65 @@
+/* FormLayout.css */
+
+/* Фон страницы */
+.form-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #6a11cb, #2575fc); /* красивый градиент */
+  padding: 20px;
+}
+
+/* Верхняя панель с кнопкой Back */
+.form-header {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+}
+
+/* Кнопка Back */
+.back-button {
+  padding: 8px 12px;
+  background-color: #e0e0e0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.back-button:hover {
+  background-color: #d0d0d0;
+}
+
+/* Белый контейнер для формы */
+.form-container {
+  width: 100%;
+  max-width: 500px;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Заголовок формы */
+.form-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+/* Notification */
+.notification {
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #fffae6;
+  border-left: 5px solid #ffcc00;
+  font-size: 14px;
+  color: #333;
+  border-radius: 5px;
+}

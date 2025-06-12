@@ -9,6 +9,11 @@ const Home = () => {
     navigate(path);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/login');
+  };
+
   return (
     <div className="home-container">
       <h1>Fast API Project - Home</h1>
@@ -17,6 +22,7 @@ const Home = () => {
         <button onClick={() => handleNavigate('/updateuser')}>Update User</button>
         <button onClick={() => handleNavigate('/deleteuser')}>Delete User</button>
         <button onClick={() => handleNavigate('/userinfo')}>Get User Info</button>
+        <button onClick={handleLogout} className="logout-button">Выйти</button>
       </div>
     </div>
   );

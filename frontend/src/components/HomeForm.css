@@ -1,36 +1,51 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #1e3a8a; /* синий фон */
+}
+
 .home-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  color: #fff;
-  padding-top: 50px;
+  justify-content: center;
+  height: 100vh;
 }
 
 .home-container h1 {
-  font-size: 36px;
-  margin-bottom: 40px;
-  text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+  color: #ffffff;
+  margin-bottom: 20px;
 }
 
 .button-group {
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  align-items: center;
+  gap: 12px;
+  width: 320px;
 }
 
 .button-group button {
-  padding: 15px 30px;
-  font-size: 18px;
-  border: none;
-  border-radius: 8px;
-  background-color: #007bff;
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  background-color: #2563eb;
   color: white;
+  border: none;
+  border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .button-group button:hover {
-  background-color: #0056b3;
+  background-color: #1d4ed8;
+}
+
+/* Дополнительно — стиль для кнопки "Выйти" — можно выделить, но она остаётся синей */
+.logout-button {
+  margin-top: 20px; /* небольшой отступ от остальных кнопок */
 }

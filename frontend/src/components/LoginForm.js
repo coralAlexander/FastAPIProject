@@ -29,7 +29,7 @@ const LoginForm = () => {
         localStorage.setItem('token', data.access_token);
         showMessage('✅ Login successful! Redirecting...');
         setTimeout(() => {
-          navigate('/home');  // редирект через 1.5 сек
+          navigate('/home');
         }, 1500);
       } else {
         const errorData = await response.json();
@@ -41,7 +41,6 @@ const LoginForm = () => {
     }
   };
 
-  // Показ сообщения + auto hide через 3 сек
   const showMessage = (text) => {
     setMessage(text);
     setTimeout(() => {
@@ -51,32 +50,34 @@ const LoginForm = () => {
 
   return (
     <div className="login-container">
-      <div className="page-header">Fast API Project</div>  {/* Заголовок */}
-      {message && <div className="notification">{message}</div>}
-      <form onSubmit={handleLogin} className="login-form">
-        <h2>Login</h2>
-        <div className="form-group">
-          <label>Username</label>
+      <div className="login-box">
+        <div className="login-logo">C</div>
+        <h2>Вход в аккаунт</h2>
+        {message && <div className="notification">{message}</div>}
+        <form onSubmit={handleLogin}>
           <input
             type="text"
+            placeholder="Username"
             value={username}
             onChange={e => setUsername(e.target.value)}
             required
-            placeholder="Enter username"
           />
-        </div>
-        <div className="form-group">
-          <label>Password</label>
           <input
             type="password"
+            placeholder="Password"
             value={password}
             onChange={e => setPassword(e.target.value)}
             required
-            placeholder="Enter password"
           />
+          <div className="login-links">
+            <a href="#">Забыли пароль?</a>
+          </div>
+          <button type="submit" className="submit-button">Войти</button>
+        </form>
+        <div className="register-link">
+          Нет аккаунта? <a href="#">Регистрация</a>
         </div>
-        <button type="submit" className="submit-button">Login</button>
-      </form>
+      </div>
     </div>
   );
 };
